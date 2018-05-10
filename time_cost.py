@@ -14,17 +14,25 @@ def calculate_distance(xs,ys, xg,yg):
     return d
 
 def calculate_arctan(xs,ys, xg, yg):
-    arctan = atan2(ys-yg, xs-xg)
+    arctan = (atan2(ys-yg, xs-xg))*360/(2*pi)
+    if arctan < 0:
+        arctan = 180 + arctan
+    #print(arctan)
     return arctan
 
 #work on different cases
 def calculate_angle(theta_s, theta_g, arctan):
-# think of different cases
-    a = abs(arctan - theta_s) + abs(arctan - theta_g)
-    b = 180 - abs(theta_s - theta_g) + theta_s + 180 - theta_g
-    angle = min(a,b)
+    if theta_s > 0 and theta_g > 0:
+        a = abs(arctan - theta_s) + abs(arctan - theta_g)
+        b = arctan + abs(180 - theta_s) + arctan + abs(180 - theta_g)
+    else:
+        a = abs(arctan - theta_s) + abs(arctan - theta_g)
+        b = 180 + theta_s - arctan + 180 + theta_g - arctan
 
-    print("the angle is: " + str(angle) + "a = " + str(a) + "b = " + str(b))
+
+    angle = min(a, b)
+
+    print("the angle is: " + str(angle) + ";  a = " + str(a) + ";  b = " + str(b))
 
     return angle
 
