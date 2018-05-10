@@ -6,7 +6,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QApplication, QWidget
 
 
-# library version number
 __version__ = "3.0.7pyqt"
 
 print("Imported cs1lib, version " + __version__)
