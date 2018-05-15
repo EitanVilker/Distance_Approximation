@@ -70,3 +70,7 @@ def calculate_distance(xS, yS, xG, yG, tS, tG):
 
 
 #if turn right, straight, turn right is the fastest forwards. turn left, back, turn left is fastest backwards.
+
+#TO DO:
+# make sure that it works lines that create an arctan in the second quadrant
+# integrate it with time cost so that you put in x and y values and get both the direction & time_cost
