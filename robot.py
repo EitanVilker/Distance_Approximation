@@ -3,6 +3,8 @@ from cs1lib import *
 
 class Robot:
 
+    image = load_image(filename)
+
     def __init__(self, x, y, r, vx, vy, w, theta):
         self.x = x;
         self.y = y;
@@ -19,4 +21,4 @@ class Robot:
 
     def draw_robot(self):
         set_fill_color(0, 0, 1)
-        draw_circle(self.x, self.y, self.r)
+        draw_image(image, self.x, self.y, self.r, cx, cy, self.theta)
