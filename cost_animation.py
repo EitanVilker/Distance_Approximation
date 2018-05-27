@@ -5,7 +5,6 @@ from math import cos, sin
 
 TIMESTEP = 1
 
-robot = Robot(200, 200, 5, 10, 10, 5, 45)
 step = 0;
 
 
@@ -62,6 +61,7 @@ def main(theta_s, theta_g, xs, ys, xg, yg):
     # xg = 25
     # yg = 20
     theta_f = calculate_arctan(xs, ys, xg, yg)
+    robot = Robot(xs, ys, theta_s)
 
     robot.draw_robot()
     robot.step(TIMESTEP)
