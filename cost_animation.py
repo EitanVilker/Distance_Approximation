@@ -1,7 +1,7 @@
-from cs1lib import *
 from time_cost import *
 from robot import *
 from math import cos, sin
+from cs1lib import *
 
 TIMESTEP = 1
 
@@ -48,18 +48,13 @@ def calculate_second_rotation(theta_g, theta_f):
         return theta_g - theta_f
         print("3) counterclockwise. Final: forwards")
     if (theta_g - theta_f) == (0 or 360):
-        print("3) none. Final: fowards")
+        print("3) none. Final: forwards")
         return 0
 
 
-def main(theta_s, theta_g, xs, ys, xg, yg):
+def animation(theta_s, theta_g, xs, ys, xg, yg):
     global step
-    # theta_s = 30
-    # theta_g = 45
-    # xs = 10
-    # ys = 30
-    # xg = 25
-    # yg = 20
+
     theta_f = calculate_arctan(xs, ys, xg, yg)
     robot = Robot(xs, ys, theta_s)
 
@@ -99,6 +94,10 @@ def main(theta_s, theta_g, xs, ys, xg, yg):
             step = 3
 
 
-start_graphics(main)
+def main():
+    animation(30, 45, 10, 35, 25, 20)
+
+
+start_graphics(main, width=800, height=800)
 
 
