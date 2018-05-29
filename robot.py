@@ -7,8 +7,7 @@ class Robot:
     def __init__(self, x, y, theta):
         self.x = x
         self.y = y
-        self.vx = 1
-        self.vy = 1
+        self.v = 2
         self.w = 1
         self.theta = theta
         self.image_height = 132
