@@ -1,23 +1,20 @@
 from cs1lib import *
+from math import cos, sin
 
 
 class Robot:
 
     def __init__(self, x, y, theta):
-        self.x = x;
-        self.y = y;
-        self.r = 3;
-        self.vx = 1;
-        self.vy = 1;
-        self.w = 2;
+        self.x = x
+        self.y = y
+        self.v = 2
+        self.w = 1
         self.theta = theta
-        self.image = load_image("circle_with_radius.gif")
-
-    def step(self, timestep):
-        self.x += self.vx * timestep
-        self.y += self.vy * timestep
-        self.theta += self.w * timestep
+        self.image_height = 132
+        self.image_width = 140
+        self.radius = 30
 
     def draw_robot(self):
         # Note: future testing required to test whether the cx and cy are correct
-        draw_image(self.image, self.x, self.y, self.x + self.r, self.y + self.r, self.theta)
+        draw_circle(self.x, self.y, self.radius)
+        draw_line(self.x, self.y, self.x + self.radius * cos(2 * pi - self.theta * pi / 180), self.y + self.radius * sin(2 * pi - self.theta * pi / 180))
