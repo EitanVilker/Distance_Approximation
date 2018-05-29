@@ -1,15 +1,17 @@
 from time_cost import *
 from robot import *
-from math import cos, sin
+from math import cos, sin, atan2
 from cs1lib import *
 
 TIMESTEP = 1
-
-step = 0;
+counter = 0
+step = 0
 
 
 def calculate_arctan(xs, ys, xg, yg):
     arctan = (atan2(ys-yg, xs-xg))*360/(2*pi)
+    if arctan < 0:
+        arctan = - arctan
     return arctan
 
 
@@ -38,6 +40,8 @@ def calculate_initial_rotation(theta_s, theta_f):
     if (theta_s - theta_f) == 180:
         print("1) none 2) backwards")
         return 0
+    else:
+        return 0
 
 
 def calculate_second_rotation(theta_g, theta_f):
@@ -50,54 +54,75 @@ def calculate_second_rotation(theta_g, theta_f):
     if (theta_g - theta_f) == (0 or 360):
         print("3) none. Final: forwards")
         return 0
+    else:
+        return 0
 
 
-def animation(theta_s, theta_g, xs, ys, xg, yg):
-    global step
+def animation(theta_f, xs, ys, xg, yg, angle1, angle2, robot):
+    global counter, step
 
-    theta_f = calculate_arctan(xs, ys, xg, yg)
-    robot = Robot(xs, ys, theta_s)
+    clear()
 
     robot.draw_robot()
-    robot.step(TIMESTEP)
+    if counter % 10000 == 0:
+        print("step: " + str(step))
+        print("x: " + str(robot.x) + ", y: " + str(robot.y))
+        print("angle: " + str(robot.theta))
+
+    # Rotate robot
     if step == 0:
-        angle = calculate_initial_rotation(theta_s, theta_f)
-        if angle > 0:
+        if angle1 > 0:
             robot.theta += TIMESTEP * robot.w
-            if robot.theta >= angle:
+            if robot.theta >= angle1:
                 step = 1
-        elif angle < 0:
+        elif angle1 < 0:
             robot.theta -= TIMESTEP * robot.w
-            if robot.theta <= angle:
+            if robot.theta <= angle1:
                 step = 1
         else:
             step = 1
 
+    # Move straight
     if step == 1:
-        # Move straight
-        robot.x += robot.vx * cos(theta_f) * TIMESTEP
-        robot.y += robot.vy * sin(theta_f) * TIMESTEP
-        if xg - 0.1 < robot.x < xg + 0.1 and yg - 0.1 < robot.y < yg + 0.1:
-            step = 2
+        robot.x += cos(theta_f) * TIMESTEP * robot.vx
+        robot.y += sin(theta_f) * TIMESTEP * robot.vy
+        if xs < xg and robot.x >= xg:
+            if ys < yg and robot.y >= yg:
+                step = 2
+            elif ys > yg and robot.y >= yg:
+                step = 2
+        elif xs > xg and robot.x <= xg:
+            if ys < yg and robot.y >= yg:
+                step = 2
+            elif ys > yg and robot.y >= yg:
+                step = 2
 
+    # Rotate robot again
     if step == 2:
-        angle = calculate_second_rotation(theta_g, theta_f)
-        if angle > 0:
+        if angle2 > 0:
             robot.theta += TIMESTEP * robot.w
-            if robot.theta >= angle:
+            if robot.theta >= angle2:
                 step = 3
-        elif angle < 0:
+        elif angle2 < 0:
             robot.theta -= TIMESTEP * robot.w
-            if robot.theta <= angle:
+            if robot.theta <= angle2:
                 step = 3
         else:
             step = 3
 
 
-def main():
-    animation(30, 45, 10, 35, 25, 20)
+def cost_animation(theta_s, theta_g, xs, ys, xg, yg):
+
+    robot = Robot(xs, ys, theta_s)
+    theta_f = calculate_arctan(xs, ys, xg, yg)
+    angle1 = calculate_initial_rotation(theta_s, theta_f)
+    angle2 = calculate_second_rotation(theta_g, theta_f)
+
+    def main():
+        animation(theta_f, xs, ys, xg, yg, angle1, angle2, robot)
+
+    start_graphics(main, width=400, height=400)
 
 
-start_graphics(main, width=800, height=800)
-
+cost_animation(30, 0, 20, 100, 50, 100)
 
