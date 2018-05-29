@@ -15,49 +15,6 @@ def calculate_arctan(xs, ys, xg, yg):
     return arctan
 
 
-def calculate_initial_rotation(theta_s, theta_f):
-    if (theta_s - theta_f) <= 90:
-        print("1) clockwise 2) forward")
-        return -(theta_s - theta_f)
-
-    if 180 > (theta_s - theta_f) > 90:
-        print("1) counterclockwise 2) backwards")
-        return theta_s - theta_f
-
-    if 270 > (theta_s - theta_f) > 180:
-        print("1) clockwise 2) backwards")
-        return -(theta_s - theta_f)
-
-    if 360 > (theta_s - theta_f) >= 270:
-        print("1) counterclockwise 2) forward")
-        return theta_s - theta_f
-
-    # Boundary cases
-    if (theta_s - theta_f) == (0 or 360):
-        print("1) none 2) forward")
-        return 0
-
-    if (theta_s - theta_f) == 180:
-        print("1) none 2) backwards")
-        return 0
-    else:
-        return 0
-
-
-def calculate_second_rotation(theta_g, theta_f):
-    if 180 >= (theta_g - theta_f) > 0:
-        print("3) clockwise. Final: forwards")
-        return theta_f - theta_g
-    if 360 > (theta_g - theta_f) > 180:
-        return theta_g - theta_f
-        print("3) counterclockwise. Final: forwards")
-    if (theta_g - theta_f) == (0 or 360):
-        print("3) none. Final: forwards")
-        return 0
-    else:
-        return 0
-
-
 def animation(theta_f, theta_s, theta_g, xs, ys, xg, yg, angle1, angle2, robot):
     global counter, step
 
@@ -120,6 +77,7 @@ def animation(theta_f, theta_s, theta_g, xs, ys, xg, yg, angle1, angle2, robot):
             else:
                 robot.theta += TIMESTEP * robot.w
 
+
 def cost_animation(theta_s, theta_g, xs, ys, xg, yg):
 
     commands = get_time_cost(xs,ys,xg,yg, theta_s, theta_g)
@@ -134,9 +92,6 @@ def cost_animation(theta_s, theta_g, xs, ys, xg, yg):
         angle2 = commands[4]
     else:
         angle2 = - commands[4]
-
-    #angle1 = calculate_initial_rotation(theta_s, theta_f)
-    #angle2 = calculate_second_rotation(theta_g, theta_f)
 
     def main():
         animation(theta_f, theta_s, theta_g, xs, ys, xg, yg, angle1, angle2, robot)
