@@ -1,4 +1,4 @@
-from math import sqrt, atan, pi
+from math import sqrt, atan, pi, sin, cos
 
 # today:
 # 1: add cases to code
@@ -155,4 +155,5 @@ get_time_cost(4,4,1,1, -160, -160) # give counter + forward + clockwise
 get_time_cost(1,1,4,4,-160, -130)  # give counter + backward + counter
 get_time_cost(1,1,4,4,30,80)   # counter + forward + clockwise
 get_time_cost(1,5,4,4, 50, 40) #clockwise, forward, clockwise
-
+sin(45)
+cos(45)
