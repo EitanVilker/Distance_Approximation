@@ -1,4 +1,8 @@
 import matplotlib.pyplot as plt
+
+
+
+
 import numpy as np
 from math import pi
 from time_cost import *

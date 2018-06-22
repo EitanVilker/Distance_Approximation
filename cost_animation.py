@@ -143,6 +143,6 @@ def cost_animation(theta_s, theta_g, xs, ys, xg, yg):
 
     start_graphics(main, width=400, height=400)
 
-cost_animation(0, 90, 200, 200, 300, 100)
+cost_animation(45, 90, 200, 200, 300, 100)
 
 
